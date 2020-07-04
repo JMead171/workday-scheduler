@@ -7,13 +7,13 @@ var today = moment().format("dddd, MMMM Do YYYY");
 var currentHour = moment().hour();
     console.log(currentHour)
 
+var text = "";
+
 // Get current time and compare to time slots
 function timeBlock() {
     $(".time-block").each(function () {
         var block = parseInt($(this).attr("id").split("hour")[1]);
-        console.log(block, currentHour);
         if (block < currentHour) {
-            console.log(this);
             $(this).addClass("past");
             $(this).removeClass("present");
             $(this).removeClass("future");
@@ -38,31 +38,34 @@ function timeBlock() {
 // Get saved appointments from local strorage
 function getAppointments() {
     // initialize appointments
-    $("#hour09 .descripton").val(" ");
-    $("#hour10 .descripton").val(" ");
-    $("#hour11 .descripton").val(" ");
-    $("#hour12 .descripton").val(" ");
-    $("#hour13 .descripton").val(" ");
-    $("#hour14 .descripton").val(" ");
-    $("#hour15 .descripton").val(" ");
-    $("#hour16 .descripton").val(" ");
-    $("#hour17 .descripton").val(" ");    
+    $("#hour09 .appt").val("");
+    $("#hour10 .appt").val("");
+    $("#hour11 .appt").val("");
+    $("#hour12 .appt").val("");
+    $("#hour13 .appt").val("");
+    $("#hour14 .appt").val("");
+    $("#hour15 .appt").val("");
+    $("#hour16 .appt").val("");
+    $("#hour17 .appt").val("");
+    $("#hour10 .appt").val("");
+    
     
     // load appointments
-    $("#hour09 .descripton").val(localStorage.getItem("hour09"));
-    $("#hour10 .descripton").val(localStorage.getItem("hour10"));
-    $("#hour11 .descripton").val(localStorage.getItem("hour11"));
-    $("#hour12 .descripton").val(localStorage.getItem("hour12"));
-    $("#hour13 .descripton").val(localStorage.getItem("hour13"));
-    $("#hour14 .descripton").val(localStorage.getItem("hour14"));
-    $("#hour15 .descripton").val(localStorage.getItem("hour15"));
-    $("#hour16 .descripton").val(localStorage.getItem("hour16"));
-    $("#hour17 .descripton").val(localStorage.getItem("hour17"));
+    $("#hour09 .appt").val(localStorage.getItem("hour09"));
+    $("#hour10 .appt").val(localStorage.getItem("hour10"));
+    $("#hour11 .appt").val(localStorage.getItem("hour11"));
+    $("#hour12 .appt").val(localStorage.getItem("hour12"));
+    $("#hour13 .appt").val(localStorage.getItem("hour13"));
+    $("#hour14 .appt").val(localStorage.getItem("hour14"));
+    $("#hour15 .appt").val(localStorage.getItem("hour15"));
+    $("#hour16 .appt").val(localStorage.getItem("hour16"));
+    $("#hour17 .appt").val(localStorage.getItem("hour17"));
+        
 }
 
 // On save button save appointment
 $(".saveBtn").on("click", function() {
-    var text = $(this).siblings(".description").val();
+    var text = $(this).siblings(".appt").val();
     var timeBlock = $(this).parent().attr("id");
     console.log(text, timeBlock);
     localStorage.setItem(timeBlock, text);
