@@ -3,13 +3,12 @@ var text = "";
 
 // Get the current day using moment and display on scheduler
 var today = moment().format("dddd, MMMM Do YYYY");
-    console.log(today);
     $("#currentDay").text(today);
 
 //Get the current hour
 var currentHour = moment().hour();
     
-// Get current time and compare to time slots
+// Get current time and compare to time slots to add background color
 function timeBlock() {
     $(".time-block").each(function () {
         var block = parseInt($(this).attr("id").split("hour")[1]);
@@ -17,18 +16,21 @@ function timeBlock() {
             $(this).addClass("past");
             $(this).removeClass("present");
             $(this).removeClass("future");
+            $(this).children(".appt").attr("disabled", "disabled");
         }
         else {        
             if (block === currentHour) {
                 $(this).removeClass("past");
                 $(this).addClass("present");
                 $(this).removeClass("future");
-            } 
+                $(this).children(".appt").removeAttr("disabled");
+            }  
             else {
                 if (block > currentHour) {
                 $(this).removeClass("past");
                 $(this).removeClass("present");
                 $(this).addClass("future");
+                $(this).children(".appt").removeAttr("disabled");
                 }
             }
         }
@@ -63,6 +65,7 @@ function getAppointments() {
 
 // On save button save appointment
 $(".saveBtn").on("click", function() {
+    event.preventDefault();
     var text = $(this).siblings(".appt").val();
     var timeBlock = $(this).parent().attr("id");
     localStorage.setItem(timeBlock, text);
