@@ -17,6 +17,7 @@ function timeBlock() {
             $(this).removeClass("present");
             $(this).removeClass("future");
             $(this).children(".appt").attr("disabled", "disabled");
+            $(this).children(".btns").attr("disabled", "disabled");
         }
         else {        
             if (block === currentHour) {
@@ -24,6 +25,7 @@ function timeBlock() {
                 $(this).addClass("present");
                 $(this).removeClass("future");
                 $(this).children(".appt").removeAttr("disabled");
+                $(this).children(".btns").removeAttr("disabled");
             }  
             else {
                 if (block > currentHour) {
@@ -31,6 +33,7 @@ function timeBlock() {
                 $(this).removeClass("present");
                 $(this).addClass("future");
                 $(this).children(".appt").removeAttr("disabled");
+                $(this).children(".btns").removeAttr("disabled");
                 }
             }
         }
